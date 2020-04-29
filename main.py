@@ -17,7 +17,7 @@ if __name__ == '__main__':
         # 选择操作
         key = movement()
         regular_wait()
-        if key == '6':
+        if key == '5':
             print('再见')
             break
         traction(key)

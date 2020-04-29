@@ -1,4 +1,5 @@
-fo = open("ultimate_skill_list.txt", "r+")
+fo = open("background.txt", "r+")
 str = fo.read()
 print(str)
 fo.close()
+print('hello world')

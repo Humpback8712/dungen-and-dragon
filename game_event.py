@@ -1,18 +1,17 @@
 from game_model import *
-flag = True
 import random
 import time
 
+flag = True
 knife = Weapon(2, '小刀')
 # 初始化角色
 def gamer_init():
+
     # 1.输入基本信息
-
     name = input('请输入你的名字: ')
-    gender = input('请输入你的性别: ')
-    # 初始装备
 
-    package = {'weapon': ['小刀'], 'medicine': []}
+    # 初始装备
+    package = {'weapon': '小刀', 'medicine': []}
     armour = {'帽子': '草帽', '上装': '短袖', '下装': '短裤', '鞋子': '草鞋'}
     blood = 100
     exp = int(0)
@@ -36,12 +35,16 @@ def gamer_init():
 
     # 2.实例对象
     global gamer
-    gamer = Person(name, gender, package, armour, blood, exp, ultimate_skill, location, strength, dexterity, intelligent, fortune)
+    gamer = Person(name, package, armour, blood, exp, ultimate_skill, location, strength, dexterity, intelligent, fortune)
 
 # 引入初始化
 def introduce():
     # 打开并读写初始化介绍
-    print('这里是初始化介绍')
+    fo = open("background.txt", "r+")
+    str = fo.read()
+    print(str)
+    fo.close()
+
 
 # 进行选择操作
 def movement():
@@ -50,13 +53,12 @@ def movement():
     print('请选择接下来你要做的操作')
     print('1.查看自身属性')
     print('2.进行移动')
-    print('3.查看周围店铺')
-    print('4.当前坐标位置')
-    print('5.保存')
-    print('6.退出')
+    print('3.当前坐标位置')
+    print('4.战斗')
+    print('5.退出')
 
     # 进行选择
-    option = ['1', '2', '3', '4', '5', '6']
+    option = ['1', '2', '3', '4', '5']
     key = input('请输入你的选择：')
     flag = False
 
@@ -117,10 +119,8 @@ def traction(key):
     elif key == '2':
         move()
     elif key == '3':
-        pass
-    elif key == '4':
         check_location()
-    elif key == '5':
+    elif key == '4':
         combiat()
 
 # 战斗函数
@@ -170,7 +170,6 @@ def combiat():
     while 1:
         death_check_gamer = gamer.blood
         death_check_monster = monster.blood
-        print(death_check_gamer)
         if death_check_gamer <= 0:
             print('你在战斗中死亡')
             time.sleep(1)
@@ -188,12 +187,16 @@ def combiat():
             time.sleep(1)
             print('怪物回合')
             monster.attack(gamer)
+            print('这时你的血量：', gamer.blood)
+            print('这时怪的血量：', monster.blood)
             next_attack = 'gamer'
             print('+' * 50)
         else:
-            monster.been_attack(gamer)
             time.sleep(1)
             print('你的回合')
+            monster.been_attack(gamer)
+            print('这时你的血量：', gamer.blood)
+            print('这时怪的血量：', monster.blood)
             next_attack = 'monster'
             print('+' * 50)
 
@@ -268,6 +271,10 @@ def dodge_gamer(gamer):
     print('+' * 50)
 
     return flag
+
+
+
+
 
 
 

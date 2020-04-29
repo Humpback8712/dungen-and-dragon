@@ -2,9 +2,8 @@
 
 class Person:
 
-    def __init__(self, name, gender, package, armour, blood, exp, ultimate_skill, location, strength, dexterity, intellengent, fortune):
+    def __init__(self, name, package, armour, blood, exp, ultimate_skill, location, strength, dexterity, intellengent, fortune):
         self.name = name
-        self.gender = gender
         self.package = package
         self.armour = armour
         self.blood = blood
@@ -24,11 +23,14 @@ class Person:
         flag = False
         while 1:
             try:
-                direction = input('请输入你的方向')
-                length = int(input('请输入你的距离'))
-                break
+                direction = input('请输入你的方向(北n南s西w东e):')
+                length = int(input('请输入你的距离:'))
             except Exception as e:
                 print('请输入正确的命令')
+            else:
+                location = person.location
+                print('你之前的位置', location)
+                break
 
         try:
             if direction == 'n':
@@ -46,6 +48,9 @@ class Person:
             self.location = new_locate
         except Exception as e:
             print('没有这个方向，你只能选择 上北（n）下南（s）左西（w）右东（e）')
+        else:
+            location = person.location
+            print('你现在的位置', location)
 
 
     def dodge(self):
@@ -54,11 +59,6 @@ class Person:
 
 
 class Shop:
-    pass
-
-
-class Map:
-    #
     pass
 
 
@@ -84,7 +84,7 @@ class Monster:
 
         package = gamer.package
         weapon = package['weapon']
-        print(weapon)
+        print('你用（' + weapon + '）攻击了怪物')
         self.blood = int(self.blood) - int(gamer.strength)
 
 
